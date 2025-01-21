@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./TaskForm.css";
 import { Tag } from "./Tag";
 
-const TaskForm = () => {
+const TaskForm = ({setTasks}) => {
   const [taskData, setTaskData] = useState({
     task: "",
-    status: "Todo",
+    status: "todo",
     tags: [],
   });
 
@@ -39,6 +39,14 @@ const TaskForm = () => {
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTasks((prev)=>{
+       return [...prev,taskData]
+    })
+    setTaskData({
+      task: "",
+      status: "todo",
+      tags: [],
+    })
   };
 
   return (
@@ -46,6 +54,7 @@ const TaskForm = () => {
       <form onSubmit={handleSubmit}>
         <input
           name="task"
+          value={taskData.task}
           onChange={handleChange}
           type="text"
           className="task_input"
@@ -81,9 +90,9 @@ const TaskForm = () => {
               value={taskData.status}
               onChange={handleChange}
             >
-              <option value="Todo">ToDo</option>
-              <option value="Doing">Doing</option>
-              <option value="Done">Done</option>
+              <option value="todo">ToDo</option>
+              <option value="doing">Doing</option>
+              <option value="done">Done</option>
             </select>
             <button type="submit" className="task_submit">
               + Add Task
