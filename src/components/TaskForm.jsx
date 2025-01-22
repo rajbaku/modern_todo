@@ -38,6 +38,7 @@ const TaskForm = ({setTasks}) => {
 
   // Function to handle form submission
   const handleSubmit = (e) => {
+    if(taskData.task === "") return alert('Please Fill The Form')
     e.preventDefault();
     setTasks((prev)=>{
        return [...prev,taskData]
